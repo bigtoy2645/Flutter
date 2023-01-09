@@ -58,6 +58,19 @@ void main() {
   double y = x.toDouble();
 }
 ```
+#### 주석
+```dart
+/// The entry point of our program
+void main() {
+  // print('Program started');
+  // TODO: Imcrement to 1.5 once feature X is added
+  /*
+   * Version 1.5 will include: 
+   * - user authentication with Firebase
+   * - generate reports
+   * /
+}
+```  
 
 #### Flutter vs Dart
 // TODO - 작성하기 
