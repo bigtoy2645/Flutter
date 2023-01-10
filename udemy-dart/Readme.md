@@ -20,6 +20,8 @@ Code > **Compilation** > APK,IPA,EXE,JS > **Execution**
 - Fast : 릴리즈 모드 컴파일 시 빠른 실행에 최적화되어있음.
 - Object Oriented : 클래스 기반 구현
 - Statically typed : 타입을 컴파일 단계에서 체크하여 안전함.
+  - Static : 컴파일 시 타입 체크 e.g. Swift, Kotlin, Dart
+  - Dynamic : 실행 중 타입 체크 e.g. JavaScript, Python
 - C-Style Syntax : Java, Javascript와 유사하여 배우기 쉬움.
 
 #### 사용 예제
@@ -72,8 +74,36 @@ void main() {
 }
 ```  
 
-#### Flutter vs Dart
-// TODO - 작성하기 
+#### 타입 키워드
+- var : read-write 변수를 나타내는 키워드
+- final : read-only 변수를 나타내는 키워드. 계산하여 값을 초기화할 수 있음.
+- const : 컴파일 시 지정되는 상수를 나타내는 키워드. 사용 시 최적화됨. 계산하여 값을 초기화할 수 없음.
+- dynamic : 어느 타입이나 될 수 있음.
 
+#### Switch + Enumeration
+```dart
+enum Operation { plus, minus, multiply, divide }
+
+void main() {
+  const a = 4;
+  const b = 2;
+  const op = Operation.plus;
+  
+  switch (op) {
+    case Operation.plus:
+      print('$a + $b = ${a + b}');
+      break;
+    case Operation.minus:
+      print('$a - $b = ${a - b}');
+      break;
+    case Operation.multiply:
+      print('$a * $b = ${a * b}');
+      break;
+    case Operation.divide:
+      print('$a / $b = ${a / b}');
+      break;
+  }
+}
+```  
 
 </details>
