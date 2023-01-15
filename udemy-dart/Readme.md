@@ -217,3 +217,30 @@ void main() {
   }
 }
 ```
+### Collection Statements and operators
+- Collection-if, Collection-for, Spreads
+```dart
+void main() {
+  const addBlue = false;
+  const addRed = true;
+  const extraColors = ['yellow', 'green'];
+  final colors = [
+    'grey',
+    'brown',
+    if (addBlue) 'blue',
+    if (addRed) 'red',
+    for (var color in extraColors) color,
+    ...extraColors,
+  ];
+  
+  print(colors);
+}
+```
+### Collection 복사
+```dart
+void main() {
+  final list = [1,2,3];
+  final copy1 = list;     // reference copy
+  final copy2 = [...list];// value copy
+}
+```
