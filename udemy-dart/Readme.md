@@ -105,5 +105,115 @@ void main() {
   }
 }
 ```  
-
 </details>
+
+## Collections
+
+### List (Array)
+- 중복된 값을 포함할 수 있는 Collection
+
+```dart
+void main() {
+  var cities = ['London', 'Paris', 'Moscow'];
+
+  // for문
+  for (var i = 0; i < cities.length; i++) {
+    print(cities[i]);
+  }
+  
+  // for-in문
+  for (var city in cities) {
+    print(city);
+  }
+ 
+  // forEach
+  cities.forEach(print);
+}
+```
+```dart
+void main() {
+  var cities = ['London', 'Paris', 'Moscow'];
+  
+  // <String> : Type Annotation (Optional)
+  var cities2 = <String>['London', 'Paris', 'Moscow'];
+  List<String> cities3 = ['London', 'Paris', 'Moscow'];
+  
+  // List 조회
+  print(cities.length);
+  print(cities.isEmpty);
+  print(cities.isNotEmpty);
+  print(cities.first);
+  print(cities.last);
+  print(cities.indexOf('London'));
+  print(cities.contains('London'));
+  
+  // List 수정
+  cities.insert(1, 'Tokyo');
+  cities.add('Seoul');
+  cities.removeAt(2);
+  cities.clear();
+}
+```
+
+### Set
+- 고유 값으로 이뤄진 Collection
+- Union, Intersection, Difference 함수 사용 가능
+
+```dart
+void main() {
+  var countries = {'Italy', 'UK', 'Russia'};
+  
+  print(countries.elementAt(0));
+  print(countries.first);
+  print(countries.last);
+  print(countries.length);
+  
+  countries.add('Korea');
+  countries.remove('Italy');
+}
+```
+```dart
+void main() {
+  var euCountries = {'Italy', 'UK', 'Russia'};
+  var asianCountries = {'India', 'China', 'Russia'};
+
+  // Union 합집합
+  // {Italy, UK, Russia, India, China}
+  print(euCountries.union(asianCountries));
+
+  // Intersection 교집합
+  // {Russia}
+  print(euCountries.intersection(asianCountries));
+
+  // Difference 차집합
+  // {Italy, UK}
+  print(euCountries.difference(asianCountries));
+}
+```
+
+### Map (Dictionary)
+- Key-value Collection
+```dart
+void main() {
+  Map<String, dynamic> person = {
+    'name': 'Andrea',
+    'age': 36,
+    'height': 1.84,
+  };
+  var name = person['name'] as String;
+  
+  print(name);
+  
+  // Interable은 순차적으로 접근할 수 있는 Collection 아이템
+  // List, Set 가능, Map 불가능
+  for (var key in person.keys) {
+    print(key);
+  }
+  for (var value in person.values) {
+    print(value);
+  }
+  for (var entry in person.entries) {
+    print('${entry.key} : ${entry.value}');
+  }
+}
+```
