@@ -244,3 +244,59 @@ void main() {
   final copy2 = [...list];// value copy
 }
 ```
+
+## Null Safety
+컴파일 단계에서 null 참조 에러를 체크함.
+- null : no value
+- Dart 2.12 버전부터 사용 가능
+
+![image](https://user-images.githubusercontent.com/17891566/212697645-d9cf2dd1-8ea9-400f-bda2-bdb203fa385c.png)
+
+### Null Safety 특징 
+1. Promotion : nullable 변수가 non-nullable로 변할 수 있다.
+```dart
+void main() {
+  int? a;
+  int b = 2;
+  if (a == null) {
+    print('a is null');
+  } else {
+    print(a + b);
+  }
+}
+```
+2. Definite Assignment : 변수가 언제 할당되는 지 알기 때문에 나중에 초기화할 수 있다.
+```dart
+void main() {
+  int x = 10;
+  int sign;
+  if (x >= 0) {
+    sign = 1;
+  } else {
+    sign = -1;
+  }
+  print(sign);
+}
+```
+
+### Operator
+
+#### Assertion Operator (!)
+nullable 변수가 항상 값을 가질 경우 ! 사용하여 non-nullable 변수에 할당 가능   
+null일 경우 런타임 에러 발생
+
+#### if-null Operator (??)
+null일 경우 ?? 뒤의 값을 사용한다.
+```dart
+void main() {
+  int x = -1;
+  int? y;
+  int? z;
+  
+  if (x > 0) { y = x; }
+  if (x > 5) { z = x; }
+  int valueY = y ?? 0;  // 방법 1
+  z ??= 0;              // 방법 2
+  int valueZ = z;
+}
+```
