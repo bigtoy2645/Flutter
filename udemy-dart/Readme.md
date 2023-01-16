@@ -300,3 +300,25 @@ void main() {
   int valueZ = z;
 }
 ```
+
+## Functions
+- {} 중괄호로 감쌀 경우 argument 지정이 가능하다.
+- argument
+  - nullable
+  - default value 지정 
+  - required 표시
+
+```dart
+void main() {
+  final person = describe('Andrea', 36);
+  final person2 = describeWithArgument(name: 'Andrea', age: 36);
+}
+
+String describe(String name, int age) {
+  return "My name is $name. I'm $age years old.";
+}
+
+String describeWithArgument({required String name, required int age}) {
+  return "My name is $name. I'm $age years old.";
+}
+```
