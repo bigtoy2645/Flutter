@@ -322,3 +322,114 @@ String describeWithArgument({required String name, required int age}) {
   return "My name is $name. I'm $age years old.";
 }
 ```
+### Fat arrow notation =>
+한 줄로 표현 가능
+```dart
+int sum(int x, int y) => x + y;
+int sum2(int x, int y) {
+  return x + y;
+}
+```
+
+### Inner Functions
+
+```dart
+void main() {
+  void foo() {
+    print("This function is foo.");
+    void bar() {
+      print("This function is bar.");
+    }
+    bar();
+  }
+  foo();
+}
+```
+
+### Anonymous Functions
+```dart
+void main() {
+  final sayHi = (String name) => 'Hi, $name';
+  print(sayHi('Andrea'));
+  
+  final sayHello = ({required String name}) => 'Hello $name';
+  print(sayHello(name: 'Andrea'));
+}
+```
+
+### Function type
+```dart
+typedef Greet = String Function(String);
+typedef Introduce = String Function(String, int);
+
+void main() {
+  final sayHi = (String name) => 'Hi, $name';
+  welcome(sayHi, 'Andrea');
+  final introduce = (String name, int age) => "I'm $name. $age years old.";
+  iam(introduce, 'Andrea', 35);
+}
+
+void welcome(Greet greet, String name) {
+  print(greet(name));
+  print('Welcome to this course');
+}
+
+void iam(Introduce introduce, String name, int age) {
+  print(introduce(name, age));
+  print('Welcome to this course');
+}
+```
+
+### Closures
+참고 : https://www.tutorealcode.com/flutter/closure
+```dart
+void main() {
+  const multiplier = 10;
+  const list = [1, 2, 3];
+  final result = list.map((x) {
+    return x * multiplier;
+  });
+  print(result);
+}
+```
+
+### Function operators
+```dart
+void main() {
+  const list = [1, 2, 3];
+  
+  // forEach
+  list.forEach((value) => print(value));
+  list.forEach(print);
+  
+  // map : lazy Iterable 타입 Return
+  final List<int> doubles = list.map((value) => value * 2).toList();
+  print(doubles); // (2, 4, 6)
+  
+  // Generic : 코드 안정성 높이고 중복 줄여줌.
+  const list2 = [1.0, 2.0, 3.0];
+  final rounded = transform<double, int>(list2, (x) => x.round());
+  print(rounded);
+  
+  // where : 조건에 맞는 아이템 리스트를 Return
+  // firstWhere : 처음으로 조건에 맞는 아이템 Return
+  const list3 = [1, 2, 3, 4];
+  final even = list3.where((value) => value % 2 == 0);
+  print(even);
+  final value = list3.firstWhere((x) => x == 5, orElse: () => -1);
+  print(value);
+  
+  // reduce : List의 모든 아이템을 결합하여 하나의 결과를 도출함.
+  const list4 = [1, 2, 3, 4];
+  final sum = list4.reduce((value, element) => value + element);
+  print(sum);
+}
+
+List<R> transform<T, R>(List<T> items, R Function(T) f) {
+  var result = <R>[];
+  for (var x in items) {
+    result.add(f(x));
+  }
+  return result;
+}
+```
