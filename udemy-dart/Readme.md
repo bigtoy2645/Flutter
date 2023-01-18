@@ -111,6 +111,7 @@ void main() {
 
 ### List (Array)
 - 중복된 값을 포함할 수 있는 Collection
+- 대괄호 []로 초기화한다.
 
 ```dart
 void main() {
@@ -130,6 +131,7 @@ void main() {
   cities.forEach(print);
 }
 ```
+
 ```dart
 void main() {
   var cities = ['London', 'Paris', 'Moscow'];
@@ -158,16 +160,19 @@ void main() {
 ### Set
 - 고유 값으로 이뤄진 Collection
 - Union, Intersection, Difference 함수 사용 가능
+- 중괄호 {}로 초기화한다.
 
 ```dart
 void main() {
   var countries = {'Italy', 'UK', 'Russia'};
   
+  // Set 조회
   print(countries.elementAt(0));
   print(countries.first);
   print(countries.last);
   print(countries.length);
   
+  // Set 수정
   countries.add('Korea');
   countries.remove('Italy');
 }
@@ -193,6 +198,8 @@ void main() {
 
 ### Map (Dictionary)
 - Key-value Collection
+- 중괄호 {}와 :로 Key-value를 초기화한다.
+
 ```dart
 void main() {
   Map<String, dynamic> person = {
@@ -250,6 +257,7 @@ void main() {
 - null : no value
 - Dart 2.12 버전부터 사용 가능
 
+https://medium.com/flutter-korea/flutter%EC%9D%98-null-safety-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-dd4ee1f7d6a5
 ![image](https://user-images.githubusercontent.com/17891566/212697645-d9cf2dd1-8ea9-400f-bda2-bdb203fa385c.png)
 
 ### Null Safety 특징 
