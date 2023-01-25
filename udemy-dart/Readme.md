@@ -449,6 +449,7 @@ List<R> transform<T, R>(List<T> items, R Function(T) f) {
 ## Classes
 
 - 모든 변수가 final일 경우 const 생성자를 쓰면 최적화 가능
+- 모든 타입은 Object를 상속받으므로 toString() 함수를 오버라이드하여 구현 시 유용  
 ### Constructor
 ```dart
 class BankAccount {
@@ -521,3 +522,60 @@ class Temperature {
 ### Private variables, methods
 - _를 붙이면 Private 변수가 됨.
 - private 변수와 public getter 변수를 사용하여 read-only 변수로 사용할 수 있음.
+
+### Subclassing
+- 부모 Class의 생성자를 자식 생성자에서 super constructor로 호출해야 함.
+- 오버라이딩 가능
+  
+```dart
+class Animal {
+  void sleep() => print('sleep');
+}
+
+/// Dog IS-A animal
+class Dog extends Animal {
+  void bark() => print('bark');
+}
+
+/// Cow IS-A animal
+class Cow extends Animal {
+  void moo() => print('moo');
+}
+
+/// CleverDog IS-A dog
+class CleverDog extends Dog {
+  void catchBall() => print('catch');
+}
+```
+  
+### Extends vs Implements
+<img width="728" alt="스크린샷 2023-01-26 오전 12 10 29" src="https://user-images.githubusercontent.com/17891566/214599859-b60abfb4-f329-4ddc-9228-929b04479f6c.png">
+
+- extends는 1개 클래스만 확장 가능
+- implements는 이미 구현된 method여도 재정의해야 함.
+
+### Class 비교
+```dart  
+class Point {
+  Point(this.x, this.y);
+  final int x;
+  final int y;
+
+  @override
+  String toString() => 'Point($x, $y)';
+
+  @override
+  bool operator ==(Object other) {
+    if (other is Point) {
+      return this.x == other.x && this.y == other.y;
+    }
+    return false;
+  }
+
+  /// covariant로 타입 지정 시 "=="가 Point 타입으로 한정됨.
+  @override
+  bool operator ==(covariant Point other) {
+    return this.x == other.x && this.y == other.y;
+  }
+}
+```
