@@ -107,6 +107,9 @@ void main() {
 ```  
 </details>
 
+<details>
+<summary>Chapter 2. Collections, Null safety, Functions</summary>
+
 ## Collections
 
 ### List (Array)
@@ -441,3 +444,80 @@ List<R> transform<T, R>(List<T> items, R Function(T) f) {
   return result;
 }
 ```
+</details>
+
+## Classes
+
+- 모든 변수가 final일 경우 const 생성자를 쓰면 최적화 가능
+### Constructor
+```dart
+class BankAccount {
+  BankAccount(double balance) {
+    this.balance = balance;
+  }
+
+  double balance = 0;
+}
+
+class BankAccount2 {
+  /// 생성자 전달 인자로 초기화하므로 balance를 임의의 값으로 초기화해줄 필요 없음.
+  BankAccount2(double balance) : balance = balance;
+
+  double balance;
+}
+
+class BankAccount3 {
+  /// 2. 생성자 전달 인자 추가
+  /// 3. 초기화 목록에서 멤버 변수를 초기화
+  BankAccount3({
+    required String accountHolder,
+    double balance = 0,
+  })  : accountHolder = accountHolder,
+        balance = balance;
+
+  /// 1. 멤버 변수 생성
+  String accountHolder;
+  double balance;
+}
+
+class BankAccount4 {
+  /// 간단하게
+  BankAccount4({
+    required this.accountHolder,
+    this.balance = 0,
+  });
+
+  String accountHolder;
+  double balance;
+}
+```
+### Named Constructor
+```dart
+class Complex {
+  const Complex(this.re, this.im);
+  const Complex.zero() : re = 0, im = 0;
+  const Complex.identity() : re = 1, im = 0;
+  const Complex.real(this.re) : im = 0;
+  const Complex.imaginary(this.im) : re = 0;
+  
+  final double re;
+  final double im;
+}
+```
+### Getter and setter
+```dart
+class Temperature {
+  Temperature.celsius(this.celsius);
+  Temperature.farenheit(double farenheit) : celsius = (farenheit - 32) / 1.8;
+
+  // 저장된 변수
+  double celsius;
+  // 계산된 변수
+  double get farenheit => celsius * 1.8 + 32;
+  set farenheit(double farenhiet) => celsius = (farenheit - 32) / 1.8;
+}
+```
+
+### Private variables, methods
+- _를 붙이면 Private 변수가 됨.
+- private 변수와 public getter 변수를 사용하여 read-only 변수로 사용할 수 있음.
