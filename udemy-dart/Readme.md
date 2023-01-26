@@ -451,6 +451,8 @@ List<R> transform<T, R>(List<T> items, R Function(T) f) {
 - 모든 변수가 final일 경우 const 생성자를 쓰면 최적화 가능
 - 모든 타입은 Object를 상속받으므로 toString() 함수를 오버라이드하여 구현 시 유용  
 ### Constructor
+- 생성자가 없을 경우 argument가 없는 생성자가 자동 생성됨.
+- 생성자가 있을 경우 argument가 없는 생성자가 자동 생성되지 않음.  
 ```dart
 class BankAccount {
   BankAccount(double balance) {
@@ -505,6 +507,11 @@ class Complex {
   final double im;
 }
 ```
+### Factory Constructor
+- 클래스의 새 인스턴스를 생성하지 않고 구현할 수 있다.
+- final 변수를 초기화한다.
+
+  
 ### Getter and setter
 ```dart
 class Temperature {
@@ -555,6 +562,7 @@ class CleverDog extends Dog {
 - implements는 이미 구현된 method여도 재정의해야 함.
 
 ### Class 비교
+- equatable package 사용 시 복잡하게 구현할 필요 없음.  
 ```dart  
 class Point {
   Point(this.x, this.y);
@@ -577,5 +585,24 @@ class Point {
   bool operator ==(covariant Point other) {
     return this.x == other.x && this.y == other.y;
   }
+}
+```
+### Cascade operator
+```dart
+void main() {
+  final path = ClosedPath();
+  // square shape
+  path.moveTo(Point(0, 0));
+  path.lineTo(Point(2, 0));
+  path.lineTo(Point(2, 2));
+  path.lineTo(Point(0, 2));
+  path.lineTo(Point(0, 0));
+
+  final path2 = ClosedPath()
+    ..moveTo(Point(0, 0))
+    ..lineTo(Point(2, 0))
+    ..lineTo(Point(2, 2))
+    ..lineTo(Point(0, 2))
+    ..lineTo(Point(0, 0));
 }
 ```
