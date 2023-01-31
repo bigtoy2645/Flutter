@@ -606,3 +606,40 @@ void main() {
     ..lineTo(Point(0, 0));
 }
 ```
+  
+## Mixin and Extensions
+- Mixins
+  - 이미 존재하는 클래스를 수정하고 함수 추가
+  - 클래스처럼 인스턴스를 생성할 순 없음. 생성자를 가질 수 없음.
+  - 네이밍이 겹치지 않도록 주의 필요
+```dart
+mixin Swimming {
+  void swim() => print('swimming');
+}
+mixin Breathing {
+  void breathe() => print('breathing');
+}
+
+class Animal with Breathing {}
+class Plant with Breathing {}
+class Fish extends Animal with Swimming {}
+class Human extends Animal with Swimming {}
+```  
+- Extensions
+  - 이미 존재하는 클래스의 수정 없이 함수 추가
+  - extension 선언한 파일을 import한 경우에만 적용됨.
+```dart
+extension NumberParsing on String {
+  int? toIntOrNull() => int.tryParse(this);
+}
+
+extension IterableX<T extends num> on Iterable<T> {
+  T sum() => reduce((value, element) => value + element as T);
+}
+
+void main() {
+  '123'.toIntOrNull();
+  final sum = [1.0, 2.0, 3.0].sum();
+  print(sum);
+}
+```
