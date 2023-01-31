@@ -7,5 +7,9 @@ void main() async {
   Stream.periodic(Duration(seconds: 1), (index) => index);
 
   final value = await stream.first;
-  await stream.forEach((element) {print(element)});
+  await stream.forEach((element) {
+    print(element);
+  });
+
+  /// map, where, forEach, ... 사용 가능
 }
