@@ -647,7 +647,10 @@ void main() {
 }
 ```
 </details>
-  
+
+<details>
+<summary>Chapter 4. Async </summary>  
+
 ## Errors vs Exceptions
 - Error : 프로그래밍 실수, 프로그램이 즉시 종료됨.
 - Exception : 예기치 않은 문제 발생, 문제를 다룰 수 있고 고칠 수 있음.
@@ -699,3 +702,4 @@ Future<void> main() async {
   }
 }  
 ```
+</details>
