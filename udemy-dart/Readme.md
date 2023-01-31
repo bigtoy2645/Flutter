@@ -446,6 +446,9 @@ List<R> transform<T, R>(List<T> items, R Function(T) f) {
 ```
 </details>
 
+<details>
+<summary>Chapter 3. Classes</summary>  
+
 ## Classes
 
 - 모든 변수가 final일 경우 const 생성자를 쓰면 최적화 가능
@@ -642,4 +645,57 @@ void main() {
   final sum = [1.0, 2.0, 3.0].sum();
   print(sum);
 }
+```
+</details>
+  
+## Errors vs Exceptions
+- Error : 프로그래밍 실수, 프로그램이 즉시 종료됨.
+- Exception : 예기치 않은 문제 발생, 문제를 다룰 수 있고 고칠 수 있음.
+- Assertion : Debug 모드에서만 활성화 됨.
+
+### Exceptions try, catch
+- rethrow는 exception을 호출한 상위 코드에 전달
+```dart
+void main() {
+  try {
+    final f = Fraction(3, 0);
+    print(f.value);
+  } on IntegerDivisionByZeroException catch (e) {
+    print(e);
+    rethrow;
+  } on Exception catch (e) {
+    print(e);
+  } finally {
+    print('testFraction done');
+  }
+}
+```
+## Asynchronous Programming
+- Future : 나중에 값이 나타남.
+- Stream : Future 배열
+```dart
+Future<String> fetchUserOrder() => Future.delayed(
+      Duration(seconds: 2),
+      () => 'Cappucchino',
+    );
+
+/// then, catchError 사용  
+void main() {
+  print('Program stared');
+  fetchUserOrder()
+      .then((order) => print('Order is ready: $order'))
+      .catchError((error) => print(error))
+      .whenComplete(() => print('Done'));
+}
+
+// async/await 사용
+Future<void> main() async {
+  print('Program stared');
+  try {
+    final order = await fetchUserOrder();
+    print(order);
+  } catch (e) {
+    print(e);
+  }
+}  
 ```
