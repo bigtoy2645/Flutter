@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo/2_application/pages/dashboard.dart';
+import 'package:todo/2_application/pages/settings.dart';
 
 import '../pages/home.dart';
 import 'go_router_observer.dart';
@@ -9,13 +11,13 @@ final GlobalKey<NavigatorState> _rootNavigatorKey =
 final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: "shell");
 
-const routeHome = "/home";
-const routeStart = "/home/start";
-const routeSettings = "/home/settings";
+const _basePath = "/home";
+const _startPath = "$_basePath/start";
+final _settingsPath = "$_basePath/${SettingsPage.pageConfig.name}";
 
 final routes = GoRouter(
   navigatorKey: _rootNavigatorKey,
-  initialLocation: routeHome,
+  initialLocation: "$_basePath/${DashboardPage.pageConfig.name}",
   // observers: [GoRouterObserver()],
   routes: [
     ShellRoute(
@@ -23,7 +25,8 @@ final routes = GoRouter(
       builder: (context, state, child) => child,
       routes: [
         GoRoute(
-          path: "/home/:tab",
+          name: HomePage.pageConfig.name,
+          path: "$_basePath/:tab",
           builder: (context, state) => HomePage(
             key: state.pageKey,
             tab: state.params["tab"] ?? "",
@@ -32,7 +35,8 @@ final routes = GoRouter(
       ],
     ),
     GoRoute(
-        path: routeSettings,
+        name: SettingsPage.pageConfig.name,
+        path: _settingsPath,
         builder: (context, state) {
           return Container(
             color: Colors.amber,
@@ -40,14 +44,14 @@ final routes = GoRouter(
               children: [
                 ElevatedButton(
                   child: const Text("Go to start"),
-                  onPressed: () => context.push(routeStart),
+                  onPressed: () => context.push(_startPath),
                 ),
                 TextButton(
                   onPressed: () {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.push(routeStart);
+                      context.push(_startPath);
                     }
                   },
                   child: const Text("Go back"),
@@ -57,7 +61,7 @@ final routes = GoRouter(
           );
         }),
     GoRoute(
-        path: routeStart,
+        path: _startPath,
         builder: (context, state) {
           return Container(
             color: Colors.blueGrey,
@@ -65,14 +69,14 @@ final routes = GoRouter(
               children: [
                 ElevatedButton(
                   child: const Text("Go to settings"),
-                  onPressed: () => context.push(routeSettings),
+                  onPressed: () => context.push(_settingsPath),
                 ),
                 TextButton(
                   onPressed: () {
                     if (context.canPop()) {
                       context.pop();
                     } else {
-                      context.push(routeSettings);
+                      context.push(_settingsPath);
                     }
                   },
                   child: const Text("Go back"),

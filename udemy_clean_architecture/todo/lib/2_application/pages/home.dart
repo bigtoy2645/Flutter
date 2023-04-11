@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo/2_application/core/page_config.dart';
 import 'package:todo/2_application/pages/dashboard.dart';
 import 'package:todo/2_application/pages/overview.dart';
 import 'package:todo/2_application/pages/settings.dart';
@@ -13,6 +14,7 @@ class HomePage extends StatefulWidget {
 
   final int index;
 
+  static const pageConfig = PageConfig(icon: Icons.home_rounded, name: "home");
   static const tabs = [
     DashboardPage.pageConfig,
     OverviewPage.pageConfig,
@@ -37,6 +39,10 @@ class _HomePageState extends State<HomePage> {
             Breakpoints.mediumAndUp: SlotLayout.from(
               key: const Key("primary-navigation-medium"),
               builder: (context) => AdaptiveScaffold.standardNavigationRail(
+                trailing: IconButton(
+                    onPressed: () =>
+                        context.pushNamed(SettingsPage.pageConfig.name),
+                    icon: Icon(SettingsPage.pageConfig.icon)),
                 selectedLabelTextStyle:
                     TextStyle(color: theme.colorScheme.onBackground),
                 selectedIconTheme:
@@ -84,5 +90,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _tapOnNavigationDestination(BuildContext context, int index) =>
-      context.go("/home/${HomePage.tabs[index].name}");
+      context.goNamed(HomePage.pageConfig.name,
+          params: {'tab': HomePage.tabs[index].name});
 }
