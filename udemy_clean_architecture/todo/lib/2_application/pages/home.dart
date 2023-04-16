@@ -3,7 +3,7 @@ import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/2_application/core/page_config.dart';
 import 'package:todo/2_application/pages/dashboard.dart';
-import 'package:todo/2_application/pages/overview.dart';
+import 'package:todo/2_application/pages/overview/overview.dart';
 import 'package:todo/2_application/pages/settings.dart';
 
 class HomePage extends StatefulWidget {
