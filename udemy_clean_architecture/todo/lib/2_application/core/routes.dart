@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo/2_application/pages/dashboard.dart';
+import 'package:todo/2_application/pages/detail/todo_detail_page.dart';
+import 'package:todo/2_application/pages/overview/overview.dart';
 import 'package:todo/2_application/pages/settings.dart';
 
+import '../../1_domain/entities/unique_id.dart';
 import '../pages/home.dart';
 import 'go_router_observer.dart';
 
@@ -31,7 +34,30 @@ final routes = GoRouter(
             key: state.pageKey,
             tab: state.params["tab"] ?? "",
           ),
-        )
+        ),
+        GoRoute(
+          name: ToDoDetailPage.pageConfig.name,
+          path: "$_basePath/overview/:collectionId",
+          builder: (context, state) => Scaffold(
+            appBar: AppBar(
+              title: const Text("details"),
+              leading: BackButton(
+                onPressed: () {
+                  if (context.canPop()) {
+                    context.pop();
+                  } else {
+                    context.goNamed(HomePage.pageConfig.name,
+                        params: {'tab': OverviewPage.pageConfig.name});
+                  }
+                },
+              ),
+            ),
+            body: ToDoDetailPageProvider(
+              collectionId: CollectionId.fromUniqueString(
+                  state.params['collectionId'] ?? ''),
+            ),
+          ),
+        ),
       ],
     ),
     GoRoute(
