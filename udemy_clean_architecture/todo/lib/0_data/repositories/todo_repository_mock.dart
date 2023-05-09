@@ -1,4 +1,5 @@
 import 'package:either_dart/either.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:todo/1_domain/entities/todo_collection.dart';
 import 'package:todo/1_domain/entities/todo_color.dart';
 import 'package:todo/1_domain/entities/todo_entry.dart';
@@ -62,5 +63,22 @@ class ToDoRepositoryMock implements ToDoRepository {
     } on Exception catch (e) {
       return Future.value(Left(ServerFailure(stackTrace: e.toString())));
     }
+  }
+
+  @override
+  Future<Either<Failure, ToDoEntry>> updateToDoEntry(
+      {required CollectionId collectionId, required EntryId entryId}) {
+    final index = toDoEntries.indexWhere((element) => element.id == entryId);
+    debugPrint("[DEBUG] updateToDoEntry index = $index");
+    final entryToUpdate = toDoEntries[index];
+    final updatedEntry =
+        toDoEntries[index].copyWith(isDone: !entryToUpdate.isDone);
+    toDoEntries[index] = updatedEntry;
+
+    debugPrint(
+        "[DEBUG] updateToDoEntry entryToUpdate = ${entryToUpdate.isDone}, updatedEntry = ${updatedEntry.isDone}");
+
+    return Future.delayed(
+        const Duration(milliseconds: 100), () => Right(updatedEntry));
   }
 }
